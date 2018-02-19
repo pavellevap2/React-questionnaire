@@ -45,27 +45,13 @@ class Questionnare extends React.Component{
                     </form>
 
                 </div>
-                <div className="b-first">
+                <div className="b-second">
                     <p>Select <b>only</b> one option</p>
                     {secondOptions.map((c, i) =>
                         <p key={i}>
                             <input type={"radio"}
                                    name="b-first"
                                    key={i}
-                                   onChange={() => this.selectOption(c)}
-                            />{c}
-                        </p>
-                    )}
-                </div>
-
-                <div className="b-first">
-                    <p>Select <b>several</b> options</p>
-                    {secondOptions.map((c, i) =>
-                        <p key={i}>
-                            <input type={"radio"}
-                                   name="b-first"
-                                   key={i}
-                                   value={c}
                                    onChange={() => this.selectOption(c)}
                             />{c}
                         </p>
@@ -84,8 +70,6 @@ class Questionnare extends React.Component{
                             </div>
                             : false
                     }
-
-
                 </div>
 
             </div>
