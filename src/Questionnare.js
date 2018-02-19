@@ -2,8 +2,6 @@ import React from 'react';
 
 const firstOptions = ["first", "second", "third"];
 const secondOptions = ["fourth", "fifth", "sixth"];
-const seconsdOptions = ["fourth", "fifth", "sixth"];
-
 const correctAnswer = ["first", "sixth"];
 
 class Questionnare extends React.Component{
