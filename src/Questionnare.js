@@ -51,7 +51,7 @@ class Questionnare extends React.Component{
 
                 <div className="b-first">
                     <p>Select <b>several</b> options</p>
-                    {seconsdOptions.map((c, i) =>
+                    {secondOptions.map((c, i) =>
                         <p key={i}>
                             <input type={"radio"}
                                    name="b-first"
