@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 const firstOptions = ["first", "second", "third"];
 const secondOptions = ["fourth", "fifth", "sixth"];
@@ -8,6 +9,7 @@ class Questionnare extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            showResult : false,
             answers:[]
         }
     }
@@ -17,13 +19,20 @@ class Questionnare extends React.Component{
             answers : this.state.answers.concat([option])
         })
     }
+    toggleButton(){
+        this.setState({
+            showResult : !this.state.showResult
+        })
+    }
 
     render(){
+        let differenceLength = (_.difference(correctAnswer,this.state.answers)).length;
+
         return(
             <div>
                 <div className="b-first">
                     <form action="">
-                        <p>Select <b>only</b> one option</p>
+                        <p>Select <b>only</b>b> one option</p>
                         {firstOptions.map((c, i) =>
                             <p key={i}>
                                 <input type={"radio"}
@@ -43,7 +52,7 @@ class Questionnare extends React.Component{
                             <input type={"radio"}
                                    name="b-first"
                                    key={i}
-                                   onChange={() => this.handleChanged(c)}
+                                   onChange={() => this.selectOption(c)}
                             />{c}
                         </p>
                     )}
@@ -57,22 +66,26 @@ class Questionnare extends React.Component{
                                    name="b-first"
                                    key={i}
                                    value={c}
-                                   onChange={()=>this.handleChanged(c)}
+                                   onChange={() => this.selectOption(c)}
                             />{c}
                         </p>
                     )}
                 </div>
 
                 <div>
-                    <p>Data output : </p>
-                    <p>{
-                       (this.state.answers[0] == correctAnswer[0] && this.state.answers[1] == correctAnswer[1])
-                        ? <span> Correct answer</span>
-                           :(this.state.answers[0] == correctAnswer[0] || this.state.answers[1] == correctAnswer[1])
-                           ? <span>1 / 2</span>
-                           : <span>0 / 2</span>
+                    <button onClick={()=>this.toggleButton()}>See result</button>
+                    {
+                        this.state.showResult
+                            ? <div>
+                                <p>Correct options :
+                                    {correctAnswer.length - differenceLength} /
+                                    {correctAnswer.length}
+                                    </p>
+                            </div>
+                            : false
                     }
-                    </p>
+
+
                 </div>
 
             </div>
