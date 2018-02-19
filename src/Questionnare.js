@@ -2,6 +2,8 @@ import React from 'react';
 
 const firstOptions = ["first", "second", "third"];
 const secondOptions = ["fourth", "fifth", "sixth"];
+const seconsdOptions = ["fourth", "fifth", "sixth"];
+
 const correctAnswer = ["first", "sixth"];
 
 class Questionnare extends React.Component{
@@ -43,11 +45,26 @@ class Questionnare extends React.Component{
                             <input type={"radio"}
                                    name="b-first"
                                    key={i}
-                                   onChange={()=>this.selectOption(c)}
+                                   onChange={() => this.handleChanged(c)}
                             />{c}
                         </p>
                     )}
                 </div>
+
+                <div className="b-first">
+                    <p>Select <b>several</b> options</p>
+                    {seconsdOptions.map((c, i) =>
+                        <p key={i}>
+                            <input type={"radio"}
+                                   name="b-first"
+                                   key={i}
+                                   value={c}
+                                   onChange={()=>this.handleChanged(c)}
+                            />{c}
+                        </p>
+                    )}
+                </div>
+
                 <div>
                     <p>Data output : </p>
                     <p>{
