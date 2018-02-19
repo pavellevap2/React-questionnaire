@@ -2,10 +2,7 @@ import React from 'react';
 
 const firstOptions = ["first", "second", "third"];
 const secondOptions = ["fourth", "fifth", "sixth"];
-
 const correctAnswer = ["first", "sixth"];
-
-
 
 class Questionnare extends React.Component{
     constructor(props){
@@ -52,13 +49,13 @@ class Questionnare extends React.Component{
                     )}
                 </div>
                 <div>
+                    <p>Data output : </p>
                     <p>{
                        (this.state.answers[0] == correctAnswer[0] && this.state.answers[1] == correctAnswer[1])
                         ? <span> Correct answer</span>
                            :(this.state.answers[0] == correctAnswer[0] || this.state.answers[1] == correctAnswer[1])
                            ? <span>1 / 2</span>
                            : <span>0 / 2</span>
-
                     }
                     </p>
                 </div>
