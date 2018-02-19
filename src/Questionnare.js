@@ -43,8 +43,8 @@ class Questionnare extends React.Component{
                             </p>
                         )}
                     </form>
-
                 </div>
+
                 <div className="b-second">
                     <p>Select <b>only</b> one option</p>
                     {secondOptions.map((c, i) =>
@@ -71,7 +71,6 @@ class Questionnare extends React.Component{
                             : false
                     }
                 </div>
-
             </div>
         )
     }
