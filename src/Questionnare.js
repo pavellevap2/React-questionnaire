@@ -1,5 +1,5 @@
-import React from 'react';
-import _ from 'lodash';
+import React from "react";
+import _ from "lodash";
 
 let questions = [
     [1, ["foo", "bar"]],        // ответ "bar"
@@ -7,7 +7,9 @@ let questions = [
     [2, ["foo", "bar", "baz"]], // ответ "baz"
 ];
 
-let correctAnswers = questions.map(x => x.filter((_, i)=> i == 0)).reduce((z, x) => z.concat(x));
+let curry = _.curry;
+let nth = (i) => xs => xs[i];
+let append = curry((x, xs) => xs.concat([x]));
 
 class Questionnare extends React.Component{
     constructor(props){
@@ -20,7 +22,7 @@ class Questionnare extends React.Component{
 
     selectOption(option){
         this.setState({
-            answers : this.state.answers.concat([option])
+            answers : append(option, this.state.answers)
         })
     }
     toggleButton(){
@@ -30,7 +32,8 @@ class Questionnare extends React.Component{
     }
 
     render(){
-        let differenceLength = (_.difference(correctAnswers, this.state.answers)).length;
+        let correctAnswers = _.difference(questions.map(nth(0), questions), this.state.answers).length;
+
         return(
             <div>
                 <div className="b-first">
@@ -42,50 +45,64 @@ class Questionnare extends React.Component{
                                        name="b-first"
                                        key={i}
                                        onChange={()=>this.selectOption(i)}
-                                />{c}
+                                />
+                                <span>{c}</span>
                             </p>
                         )}
                     </form>
                 </div>
 
                 <div className="b-second">
-                    <p>Select <b>only</b> one option</p>
-                    {questions[1][1].map((c, i) =>
-                        <p key={i}>
-                            <input type={"radio"}
-                                   name="b-first"
-                                   key={i}
-                                   onChange={() => this.selectOption(i)}
-                            />{c}
-                        </p>
-                    )}
+                    <form action="">
+                        <p>Select <b>only</b> one option</p>
+                        {questions[1][1].map((c, i) =>
+                            <p key={i}>
+                                <input type={"radio"}
+                                       name="b-first"
+                                       key={i}
+                                       onChange={() => this.selectOption(i)}
+                                />
+                                <span>{c}</span>
+                            </p>
+                        )}
+                    </form>
+
                 </div>
 
                 <div className="b-third">
-                    <p>Select <b>only</b> one option</p>
-                    {questions[2][1].map((c, i) =>
-                        <p key={i}>
-                            <input type={"radio"}
-                                   name="b-first"
-                                   key={i}
-                                   onChange={() => this.selectOption(i)}
-                            />{c}
-                        </p>
-                    )}
+                    <form action="">
+                        <p>Select <b>only</b> one option</p>
+                        {questions[2][1].map((c, i) =>
+                            <p key={i}>
+                                <input type={"radio"}
+                                       name="b-first"
+                                       key={i}
+                                       onChange={() => this.selectOption(i)}
+                                />
+                                <span>{c}</span>
+                            </p>
+                        )}
+                    </form>
+
                 </div>
 
                 <div>
-                    <button onClick={()=>this.toggleButton()}>See result</button>
-                    {
-                        this.state.showResult
-                            ? <div>
-                                <p>Correct options :
-                                    {correctAnswers.length - differenceLength} /
-                                    {correctAnswers.length}
-                                </p>
-                            </div>
-                            : false
+                    <button onClick={()=> this.toggleButton()}>See result</button>
+                    <button onClick={()=>
+                        console.log(_.difference(questions.map(nth(0), questions), this.state.answers))}>e</button>
+
+                    {(this.state.showResult)
+                        ? <p>
+                            <span>Result : </span>
+                            {
+                                <span>
+                                    {questions.length - correctAnswers} / {questions.length}
+                                </span>
+                            }
+                            </p>
+                        : false
                     }
+
                 </div>
             </div>
         )
