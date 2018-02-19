@@ -88,9 +88,6 @@ class Questionnare extends React.Component{
 
                 <div>
                     <button onClick={()=> this.toggleButton()}>See result</button>
-                    <button onClick={()=>
-                        console.log(_.difference(questions.map(nth(0), questions), this.state.answers))}>e</button>
-
                     {(this.state.showResult)
                         ? <p>
                             <span>Result : </span>
