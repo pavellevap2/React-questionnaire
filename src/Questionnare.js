@@ -11,6 +11,9 @@ let curry = _.curry;
 let nth = (i) => xs => xs[i];
 let append = curry((x, xs) => xs.concat([x]));
 
+let answers = questions.map(nth(0), questions);
+let equals = (x1, x2) => x1 === x2;
+
 class Questionnare extends React.Component{
     constructor(props){
         super(props);
@@ -32,7 +35,7 @@ class Questionnare extends React.Component{
     }
 
     render(){
-        let correctAnswers = _.difference(questions.map(nth(0), questions), this.state.answers).length;
+        let correctAnswers = _.zipWith(equals(), answers, this.state.answers);
 
         return(
             <div>
@@ -83,12 +86,10 @@ class Questionnare extends React.Component{
                             </p>
                         )}
                     </form>
-
                 </div>
 
                 <div>
                     <button onClick={()=> this.toggleButton()}>See result</button>
-                    {(this.state.showResult)
                         ? <p>
                             <span>Result : </span>
                             {
@@ -99,10 +100,10 @@ class Questionnare extends React.Component{
                             </p>
                         : false
                     }
-
                 </div>
             </div>
         )
     }
+
 }
 export default Questionnare;
