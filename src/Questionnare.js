@@ -131,4 +131,4 @@ class Questionnare extends React.Component{
     }
 
 }
-export default Questionnare;
+export default Questionnare
