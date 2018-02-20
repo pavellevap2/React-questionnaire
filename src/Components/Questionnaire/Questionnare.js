@@ -49,7 +49,6 @@ class Questionnaire extends React.Component{
 
         return(
             <div>
-                <Switch>
                     <Route exact path="/" component={HomePage}/>
 
                     <Route path="/next/1" render={() => <Question arrayIndex={0} linkTo={"/next/2"}
@@ -62,8 +61,6 @@ class Questionnaire extends React.Component{
                                                              questions={questions}
                                                              onChange={(i) => this.selectOption(i)} />}/>
                     <Route path="/next/4" render={() => <ResultPage correctAnswers={correctAnswersLength}/>}/>
-
-                </Switch>
             </div>
 
         )
