@@ -1,5 +1,7 @@
 import React from "react";
-import _ from "lodash";
+import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+
+const R = require("ramda");
 
 let questions = [
     [1, ["foo", "bar"]],        // ответ "bar"
@@ -7,12 +9,81 @@ let questions = [
     [2, ["foo", "bar", "baz"]], // ответ "baz"
 ];
 
-let curry = _.curry;
 let nth = (i) => xs => xs[i];
-let append = curry((x, xs) => xs.concat([x]));
-
 let answers = questions.map(nth(0), questions);
+
+let append = R.curry((xs, x) => xs.concat([x]));
 let equals = (x1, x2) => x1 === x2;
+
+
+let FirstQuestion = (props) => {
+    return(
+        <div className="b-first">
+            <form action="">
+                <p>Select <b>only</b> one option</p>
+                {questions[0][1].map((c, i) =>
+                    <p key={i}>
+                        <input type="radio"
+                               name="b-first"
+                               key={i}
+                               onChange={props.onChange}
+                        />
+                        <span>{c}</span>
+                    </p>
+                )}
+            </form>
+        </div>
+    )
+}
+
+let SecondQuestion = (props) => {
+    return(
+        <div className="b-first">
+            <form action="">
+                <p>Select <b>only</b> one option</p>
+                {questions[1][1].map((c, i) =>
+                    <p key={i}>
+                        <input type="radio"
+                               name="b-first"
+                               key={i}
+                               onChange={props.onChange}
+                        />
+                        <span>{c}</span>
+                    </p>
+                )}
+            </form>
+        </div>
+    )
+}
+let ThirdQuestion = (props) => {
+    return(
+        <div className="b-first">
+            <form action="">
+                <p>Select <b>only</b> one option</p>
+                {questions[2][1].map((c, i) =>
+                    <p key={i}>
+                        <input type="radio"
+                               name="b-first"
+                               key={i}
+                               onChange={props.onChange}
+                        />
+                        <span>{c}</span>
+                    </p>
+                )}
+            </form>
+        </div>
+    )
+}
+
+const Main = () => (
+    <main>
+        <Switch>
+            <Route exact path='/1' component={<FirstQuestion/>}/>
+            <Route path='/2' component={SecondQuestion}/>
+            <Route path='/3' component={ThirdQuestion}/>
+        </Switch>
+    </main>
+)
 
 class Questionnare extends React.Component{
     constructor(props){
@@ -35,73 +106,27 @@ class Questionnare extends React.Component{
     }
 
     render(){
-        let correctAnswers = _.zipWith(equals(), answers, this.state.answers);
-
+        let correctAnswers = ((R.zipWith(equals, answers, this.state.answers)).filter(x => x)).length;
         return(
-            <div>
-                <div className="b-first">
-                    <form action="">
-                        <p>Select <b>only</b> one option</p>
-                        {questions[0][1].map((c, i) =>
-                            <p key={i}>
-                                <input type="radio"
-                                       name="b-first"
-                                       key={i}
-                                       onChange={()=>this.selectOption(i)}
-                                />
-                                <span>{c}</span>
-                            </p>
-                        )}
-                    </form>
-                </div>
-
-                <div className="b-second">
-                    <form action="">
-                        <p>Select <b>only</b> one option</p>
-                        {questions[1][1].map((c, i) =>
-                            <p key={i}>
-                                <input type={"radio"}
-                                       name="b-first"
-                                       key={i}
-                                       onChange={() => this.selectOption(i)}
-                                />
-                                <span>{c}</span>
-                            </p>
-                        )}
-                    </form>
-
-                </div>
-
-                <div className="b-third">
-                    <form action="">
-                        <p>Select <b>only</b> one option</p>
-                        {questions[2][1].map((c, i) =>
-                            <p key={i}>
-                                <input type={"radio"}
-                                       name="b-first"
-                                       key={i}
-                                       onChange={() => this.selectOption(i)}
-                                />
-                                <span>{c}</span>
-                            </p>
-                        )}
-                    </form>
-                </div>
-
-                <div>
-                    <button onClick={()=> this.toggleButton()}>See result</button>
-                        ? <p>
-                            <span>Result : </span>
-                            {
-                                <span>
-                                    {questions.length - correctAnswers} / {questions.length}
-                                </span>
-                            }
-                            </p>
-                        : false
-                    }
-                </div>
-            </div>
+            <Router>
+               <div>
+                    <div>
+                        <Route/>
+                    </div>
+                        <button onClick={()=> this.toggleButton()}>See result</button>
+                        {this.state.showResult
+                            ? <p>
+                                <span>Result : </span>
+                                {
+                                    <span>
+                                        {questions.length - correctAnswers} / {questions.length}
+                                    </span>
+                                }
+                                </p>
+                            : false
+                        }
+               </div>
+            </Router>
         )
     }
 
