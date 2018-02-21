@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {questions} from "../Questionnaire/Questionnare";
 
-let Question = (props) =>{
+let Questions = (props) =>{
     return (
         <div className="b-first">
             <p>Select option</p>
@@ -14,9 +14,9 @@ let Question = (props) =>{
                             <span>{c}</span>
                         </p>
                 )}
-            <p><Link to={props.linkTo}>Next</Link></p>
+            <p><Link to={props.nextURL}>Next</Link></p>
         </div>
     )
 };
 
-export default Question;
+export default Questions;

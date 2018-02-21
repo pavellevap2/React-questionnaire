@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Link, Switch} from "react-router-dom";
-import  Question from "../Question/Question";
+import  Questions from "../Questions/Questions";
 import * as R from "ramda";
 
 let questions = [
@@ -10,27 +10,22 @@ let questions = [
 ];
 const answers = questions.map(R.nth(0), questions);
 
- class HomePage extends React.Component{
-     render(){
-         return (
-             <div>
-                 <h1>Srart make questionnaire</h1>
-                 <ul>
-                     <li><Link to={"/next/id/1"}>Next</Link></li>
-                 </ul>
-                 {this.props.children}
-             </div>
-         )
-     }
- };
+const HomePage = () => {
+    return(
+        <div>
+            <h1>Srart make questionnaire</h1>
+            <p><Link to={"/next/0/"}>Next</Link></p>
+        </div>
+    )
+};
 
 let ResultPage = (props) => {
     return(
-        <div>
-            <p>Result :
-                {<span>{props.numberOfCorrectAnswers} / {questions.length}</span>}
-            </p>
-        </div>
+            <div>
+                <p>Result :
+                    {<span> {props.numberOfCorrectAnswers} / {questions.length} </span>}
+                </p>
+            </div>
     )
 };
 
@@ -51,21 +46,21 @@ class Questionnaire extends React.Component{
     render(){
         let correctAnswers = (R.zipWith(R.equals, answers, this.state.answers)).filter(x => x);
 
+        let renderQuestions = ({match}) => {
+            let nextURL = (match.params.page == questions.length - 1) ?  "/results"
+                : `/next/${Number(match.params.page) + 1}/`;
+
+            return <Questions nextURL={nextURL} arrayIndex={match.params.page} onChange={(i) => this.selectOption(i)}/>
+        };
+
         return(
             <div>
-                        <Route exact path="/" component={HomePage}/>
-
-                        <Route path="/next/id/1" render={() => <Question arrayIndex={0} linkTo={"/next/id/2"}
-                                                                        questions={questions}
-                                                                        onChange={(i) => this.selectOption(i)}/>}/>
-                        <Route path="/next/id/2" render={() => <Question arrayIndex={1} linkTo={"/next/id/3"}
-                                                                        questions={questions}
-                                                                        onChange={(i) => this.selectOption(i)} />}/>
-                        <Route path="/next/id/3" render={() => <Question arrayIndex={2} linkTo={"/next/id/4"}
-                                                                        questions={questions}
-                                                                        onChange={(i) => this.selectOption(i)} />}/>
-                        <Route path="/next/id/4" render={() => <ResultPage
-                            numberOfCorrectAnswers={correctAnswers.length}/>}/>
+                <Switch>
+                    <Route exact path="/" component={HomePage}/>
+                    <Route path="/next/:page/" render={renderQuestions}/>
+                    <Route path="/results" render={()=> <ResultPage numberOfCorrectAnswers={correctAnswers.length}/>}
+                    />
+                </Switch>
             </div>
         )
     }
