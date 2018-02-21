@@ -10,14 +10,19 @@ let questions = [
 ];
 const answers = questions.map(R.nth(0), questions);
 
-let HomePage = () => {
-    return (
-        <div>
-            <h1>Srart make questionnaire</h1>
-            <p><Link to={"/next/1"}>Start</Link></p>
-        </div>
-    )
-};
+ class HomePage extends React.Component{
+     render(){
+         return (
+             <div>
+                 <h1>Srart make questionnaire</h1>
+                 <ul>
+                     <li><Link to={"/next/id/1"}>Next</Link></li>
+                 </ul>
+                 {this.props.children}
+             </div>
+         )
+     }
+ };
 
 let ResultPage = (props) => {
     return(
@@ -51,16 +56,16 @@ class Questionnaire extends React.Component{
                     <Switch>
                         <Route exact path="/" component={HomePage}/>
 
-                        <Route path="/next/:id" render={() => <Question arrayIndex={0} linkTo={"/next/:id"}
-                                                                      questions={questions}
-                                                                      onChange={(i) => this.selectOption(i)}/>}/>
-                        <Route path="/next/:id" render={() => <Question arrayIndex={1} linkTo={"/next/:id"}
-                                                                      questions={questions}
-                                                                      onChange={(i) => this.selectOption(i)} />}/>
-                        <Route path="/next/:id" render={() => <Question arrayIndex={2} linkTo={"/next/:id"}
-                                                                      questions={questions}
-                                                                      onChange={(i) => this.selectOption(i)} />}/>
-                        <Route path="/next/:id" render={() => <ResultPage
+                        <Route path="/next/:id/1" render={() => <Question arrayIndex={0} linkTo={"/next/id/2"}
+                                                                        questions={questions}
+                                                                        onChange={(i) => this.selectOption(i)}/>}/>
+                        <Route path="/next/:id/2" render={() => <Question arrayIndex={1} linkTo={"/next/id/3"}
+                                                                        questions={questions}
+                                                                        onChange={(i) => this.selectOption(i)} />}/>
+                        <Route path="/next/:id/3" render={() => <Question arrayIndex={2} linkTo={"/next/id/4"}
+                                                                        questions={questions}
+                                                                        onChange={(i) => this.selectOption(i)} />}/>
+                        <Route path="/next/:id/4" render={() => <ResultPage
                             numberOfCorrectAnswers={correctAnswers.length}/>}/>
                     </Switch>
             </div>

@@ -14,7 +14,7 @@ let Question = (props) =>{
                             <span>{c}</span>
                         </p>
                 )}
-                <p><Link to={props.linkTo}>Next question</Link></p>
+            <p><Link to={props.linkTo}>Next</Link></p>
         </div>
     )
 };
