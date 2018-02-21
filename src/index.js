@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Questionnare from "./Questionnare"
+import {Questionnaire} from "./Components/Questionnaire/Questionnare";
+import { BrowserRouter} from 'react-router-dom';
 
-import registerServiceWorker from './registerServiceWorker';
-
-ReactDOM.render(<Questionnare/>, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+    <BrowserRouter>
+        <Questionnaire/>
+    </BrowserRouter>
+    ,document.getElementById('root')
+);
