@@ -1,19 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
-let questions = [
-    [1, ["foo", "bar"]],        // ответ "bar"
-    [0, ["bar", "foo"]],        // ответ "bar"
-    [2, ["foo", "bar", "baz"]], // ответ "baz"
-];
+import {questions} from "../Questionnaire/Questionnare";
 
 let Question = (props) =>{
     return (
         <div className="b-first">
             <p>Select option</p>
-            <form action="">
-                {
-                    questions[props.arrayIndex][1].map((c, i) =>
+                {questions[props.arrayIndex][1].map((c, i) =>
                         <p key={i}>
                             <input type="radio" name="questions"
                                    key={i}
@@ -21,10 +14,9 @@ let Question = (props) =>{
                             <span>{c}</span>
                         </p>
                 )}
-            </form>
                 <p><Link to={props.linkTo}>Next question</Link></p>
         </div>
     )
 };
 
-export {questions, Question};
+export default Question;

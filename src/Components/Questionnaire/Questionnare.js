@@ -1,14 +1,14 @@
 import React from "react";
-import { Route, Link, Switch} from 'react-router-dom';
-import {questions, Question} from "../Question/Question";
+import { Route, Link, Switch} from "react-router-dom";
+import  Question from "../Question/Question";
+import * as R from "ramda";
 
-const R = require("ramda");
-
-let nth = (i) => xs => xs[i];
-let answers = questions.map(nth(0), questions);
-
-let append = R.curry((x, xs) => xs.concat([x]));
-let equals = (x1, x2) => x1 === x2;
+let questions = [
+    [1, ["foo", "bar"]],        // ответ "bar"
+    [0, ["bar", "foo"]],        // ответ "bar"
+    [2, ["foo", "bar", "baz"]], // ответ "baz"
+];
+const answers = questions.map(R.nth(0), questions);
 
 let HomePage = () => {
     return (
@@ -23,7 +23,7 @@ let ResultPage = (props) => {
     return(
         <div>
             <p>Result :
-                {<span>{props.correctAnswers} / {questions.length}</span>}
+                {<span>{props.numberOfCorrectAnswers} / {questions.length}</span>}
             </p>
         </div>
     )
@@ -33,38 +33,39 @@ class Questionnaire extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            showResult : false,
             answers:[],
         }
     }
 
     selectOption(option){
         this.setState({
-            answers : append(option, this.state.answers)
+            answers : R.append(option, this.state.answers)
         })
     }
 
     render(){
-        let correctAnswersLength = ((R.zipWith(equals, answers, this.state.answers)).filter(x => x)).length;
+        let correctAnswers = (R.zipWith(R.equals, answers, this.state.answers)).filter(x => x);
 
         return(
             <div>
-                    <Route exact path="/" component={HomePage}/>
+                    <Switch>
+                        <Route exact path="/" component={HomePage}/>
 
-                    <Route path="/next/1" render={() => <Question arrayIndex={0} linkTo={"/next/2"}
-                                                             questions={questions}
-                                                             onChange={(i) => this.selectOption(i)}/>}/>
-                    <Route path="/next/2" render={() => <Question arrayIndex={1} linkTo={"/next/3"}
-                                                             questions={questions}
-                                                             onChange={(i) => this.selectOption(i)} />}/>
-                    <Route path="/next/3" render={() => <Question arrayIndex={2} linkTo={"/next/4"}
-                                                             questions={questions}
-                                                             onChange={(i) => this.selectOption(i)} />}/>
-                    <Route path="/next/4" render={() => <ResultPage correctAnswers={correctAnswersLength}/>}/>
+                        <Route path="/next/:id" render={() => <Question arrayIndex={0} linkTo={"/next/:id"}
+                                                                      questions={questions}
+                                                                      onChange={(i) => this.selectOption(i)}/>}/>
+                        <Route path="/next/:id" render={() => <Question arrayIndex={1} linkTo={"/next/:id"}
+                                                                      questions={questions}
+                                                                      onChange={(i) => this.selectOption(i)} />}/>
+                        <Route path="/next/:id" render={() => <Question arrayIndex={2} linkTo={"/next/:id"}
+                                                                      questions={questions}
+                                                                      onChange={(i) => this.selectOption(i)} />}/>
+                        <Route path="/next/:id" render={() => <ResultPage
+                            numberOfCorrectAnswers={correctAnswers.length}/>}/>
+                    </Switch>
             </div>
-
         )
     }
 
 }
-export default Questionnaire;
+export {Questionnaire, questions};
