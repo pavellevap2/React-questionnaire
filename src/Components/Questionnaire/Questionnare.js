@@ -53,21 +53,19 @@ class Questionnaire extends React.Component{
 
         return(
             <div>
-                    <Switch>
                         <Route exact path="/" component={HomePage}/>
 
-                        <Route path="/next/:id/1" render={() => <Question arrayIndex={0} linkTo={"/next/id/2"}
+                        <Route path="/next/id/1" render={() => <Question arrayIndex={0} linkTo={"/next/id/2"}
                                                                         questions={questions}
                                                                         onChange={(i) => this.selectOption(i)}/>}/>
-                        <Route path="/next/:id/2" render={() => <Question arrayIndex={1} linkTo={"/next/id/3"}
+                        <Route path="/next/id/2" render={() => <Question arrayIndex={1} linkTo={"/next/id/3"}
                                                                         questions={questions}
                                                                         onChange={(i) => this.selectOption(i)} />}/>
-                        <Route path="/next/:id/3" render={() => <Question arrayIndex={2} linkTo={"/next/id/4"}
+                        <Route path="/next/id/3" render={() => <Question arrayIndex={2} linkTo={"/next/id/4"}
                                                                         questions={questions}
                                                                         onChange={(i) => this.selectOption(i)} />}/>
-                        <Route path="/next/:id/4" render={() => <ResultPage
+                        <Route path="/next/id/4" render={() => <ResultPage
                             numberOfCorrectAnswers={correctAnswers.length}/>}/>
-                    </Switch>
             </div>
         )
     }
