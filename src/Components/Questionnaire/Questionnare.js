@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Link, Switch} from "react-router-dom";
-import  Questions from "../Questions/Questions";
+import  Questions from "../Questions/Question";
 import * as R from "ramda";
 
 let questions = [
@@ -50,7 +50,8 @@ class Questionnaire extends React.Component{
             let nextURL = (match.params.page == questions.length - 1) ?  "/results"
                 : `/next/${Number(match.params.page) + 1}/`;
 
-            return <Questions nextURL={nextURL} arrayIndex={match.params.page} onChange={(i) => this.selectOption(i)}/>
+            return <Questions nextURL={nextURL} questionNumber={match.params.page}
+                              onChange={(i) => this.selectOption(i)}/>
         };
 
         return(
