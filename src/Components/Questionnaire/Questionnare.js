@@ -1,57 +1,48 @@
 import React from "react";
 import { Route, Link, Switch} from "react-router-dom";
-import  Questions from "../Questions/Question";
+import "./Questionnare.css"
 import * as R from "ramda";
 
-let questions = [
+import QuestionAboutReact from "../QuestionAboutReact/QuestionAboutReact";
+import HomePage from "../StaticPages/HomePage";
+import ResultPage from "../StaticPages/ResultPage";
+
+const questions = [
+    "firstQuestion ?",
+    "secondQuestion ?",
+    "thirdQuestion ?",
+];
+
+const options = [
     [1, ["foo", "bar"]],        // ответ "bar"
     [0, ["bar", "foo"]],        // ответ "bar"
     [2, ["foo", "bar", "baz"]], // ответ "baz"
 ];
-const answers = questions.map(R.nth(0), questions);
-
-const HomePage = () => {
-    return(
-        <div>
-            <h1>Srart make questionnaire</h1>
-            <p><Link to={"/next/0/"}>Next</Link></p>
-        </div>
-    )
-};
-
-let ResultPage = (props) => {
-    return(
-            <div>
-                <p>Result :
-                    {<span> {props.numberOfCorrectAnswers} / {questions.length} </span>}
-                </p>
-            </div>
-    )
-};
+const correctOptions = options.map(R.nth(0), options);
 
 class Questionnaire extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            answers:[],
+            userAnswers:[],
         }
     }
 
     selectOption(option){
         this.setState({
-            answers : R.append(option, this.state.answers)
+            userAnswers : R.append(option, this.state.userAnswers)
         })
     }
 
     render(){
-        let correctAnswers = (R.zipWith(R.equals, answers, this.state.answers)).filter(x => x);
+        let UserCorrectAnswers = (R.zipWith(R.equals, correctOptions, this.state.userAnswers)).filter(x => x);
 
         let renderQuestions = ({match}) => {
-            let nextURL = (match.params.page == questions.length - 1) ?  "/results"
+            let nextURL = (match.params.page == options.length - 1) ?  "/results"
                 : `/next/${Number(match.params.page) + 1}/`;
 
-            return <Questions nextURL={nextURL} questionNumber={match.params.page}
-                              onChange={(i) => this.selectOption(i)}/>
+            return <QuestionAboutReact question={match.params.page} optionNumber={match.params.page}
+                                       onChange={(i) => this.selectOption(i)} nextURL={nextURL} />
         };
 
         return(
@@ -59,7 +50,8 @@ class Questionnaire extends React.Component{
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
                     <Route path="/next/:page/" render={renderQuestions}/>
-                    <Route path="/results" render={()=> <ResultPage numberOfCorrectAnswers={correctAnswers.length}/>}
+                    <Route path="/results" render={()=> <ResultPage optionsLength={options.length}
+                        numberOfCorrectAnswers={UserCorrectAnswers.length}/>}
                     />
                 </Switch>
             </div>
@@ -67,4 +59,4 @@ class Questionnaire extends React.Component{
     }
 
 }
-export {Questionnaire, questions};
+export {Questionnaire, options, questions};

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAYA,SAAU;EALR,QAAQ,EAMU,QAAQ;EAL1B,GAAG,EAKwB,GAAG;EAJ9B,IAAI,EAI2B,GAAG;EAClC,yBAAgB;IAbhB,KAAK,EAciB,KAAK;IAb3B,SAAS,EAamB,IAAI;IAZhC,WAAW,EAYsB,IAAI;IAXrC,OAAO,EAW+B,CAAC",
+"sources": ["StaticPages.scss"],
+"names": [],
+"file": "StaticPages.css"
+}

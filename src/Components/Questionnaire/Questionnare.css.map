@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,IAAI;EACF,gBAAgB,EAAE,KAAK",
+"sources": ["Questionnare.scss"],
+"names": [],
+"file": "Questionnare.css"
+}
