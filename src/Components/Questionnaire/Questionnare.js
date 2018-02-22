@@ -18,13 +18,13 @@ const options = [
     [0, ["bar", "foo"]],        // ответ "bar"
     [2, ["foo", "bar", "baz"]], // ответ "baz"
 ];
-const correctOptions = options.map(R.nth(0), options);
+const correctOptions = options.map(R.nth(0), options); //правильные ответы
 
 class Questionnaire extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            userAnswers:[],
+            userAnswers:[], //ответы пользователя
         }
     }
 
