@@ -1,0 +1,34 @@
+@import "../StaticPages/StaticPages";
+
+.Question{
+  margin-top: 5%;
+  .Question-title{
+    @include text-props(red,48px,bold,15px 20px);
+    border-bottom: 1px solid white;
+    margin-bottom: 3%;
+  }
+  .Question-options{
+    padding-bottom: 15px;
+      .Question-input{
+        margin-left: 3%;
+      }
+        .Question-text{
+          @include text-props(white,38px,bold,20px);
+          text-transform: capitalize;
+        }
+  }
+  .Question-border{
+    margin-top: 3%;
+    border-bottom: 1px solid white;
+  }
+  .Question-link{
+    margin:5% 1%;
+    a{
+       @include text-props(red,32px,bold,10px 20px);
+      border:1px solid white;
+      &:hover{
+        background-color: black;
+      }
+     }
+  }
+}

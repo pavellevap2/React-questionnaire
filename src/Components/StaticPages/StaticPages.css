@@ -1,11 +1,34 @@
 .HomePage {
+  margin-top: 15vh;
   position: relative;
-  top: 35%;
-  left: 10%; }
+  top: _;
+  left: 18%; }
+  .HomePage .HomePage-logo {
+    position: relative;
+    top: _;
+    left: 27%;
+    width: 120px;
+    height: 120px; }
   .HomePage .HomePage-title {
     color: white;
-    font-size: 40px;
+    font-size: 48px;
     font-weight: bold;
-    padding: _; }
+    padding: _;
+    text-shadow: 2px 2px 3px black; }
+  .HomePage .HomePage-start {
+    margin-top: 10vh;
+    position: relative;
+    top: _;
+    left: 21%; }
+    .HomePage .HomePage-start a {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 15px 65px;
+      border: 1px solid white;
+      text-shadow: 2px 2px 3px black; }
+      .HomePage .HomePage-start a:hover {
+        color: black;
+        background-color: red; }
 
 /*# sourceMappingURL=StaticPages.css.map */

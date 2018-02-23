@@ -1,0 +1,67 @@
+.HomePage {
+  margin-top: 15vh;
+  position: relative;
+  top: _;
+  left: 18%; }
+  .HomePage .HomePage-logo {
+    position: relative;
+    top: _;
+    left: 27%;
+    width: 120px;
+    height: 120px; }
+  .HomePage .HomePage-title {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    padding: _;
+    text-shadow: 2px 2px 3px black; }
+  .HomePage .HomePage-start {
+    margin-top: 10vh;
+    position: relative;
+    top: _;
+    left: 21%; }
+    .HomePage .HomePage-start a {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 15px 65px;
+      border: 1px solid white;
+      text-shadow: 2px 2px 3px black; }
+      .HomePage .HomePage-start a:hover {
+        color: black;
+        background-color: red; }
+
+.Question {
+  margin-top: 5%; }
+  .Question .Question-title {
+    color: red;
+    font-size: 48px;
+    font-weight: bold;
+    padding: 15px 20px;
+    border-bottom: 1px solid white;
+    margin-bottom: 3%; }
+  .Question .Question-options {
+    padding-bottom: 15px; }
+    .Question .Question-options .Question-input {
+      margin-left: 3%; }
+    .Question .Question-options .Question-text {
+      color: white;
+      font-size: 38px;
+      font-weight: bold;
+      padding: 20px;
+      text-transform: capitalize; }
+  .Question .Question-border {
+    margin-top: 3%;
+    border-bottom: 1px solid white; }
+  .Question .Question-link {
+    margin: 5% 1%; }
+    .Question .Question-link a {
+      color: red;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 1px solid white; }
+      .Question .Question-link a:hover {
+        background-color: black; }
+
+/*# sourceMappingURL=Question.css.map */

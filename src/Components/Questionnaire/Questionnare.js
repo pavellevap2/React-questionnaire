@@ -3,7 +3,7 @@ import { Route, Link, Switch} from "react-router-dom";
 import "./Questionnare.css"
 import * as R from "ramda";
 
-import QuestionAboutReact from "../QuestionAboutReact/QuestionAboutReact";
+import Question from "../Question/Question";
 import HomePage from "../StaticPages/HomePage";
 import ResultPage from "../StaticPages/ResultPage";
 
@@ -41,7 +41,7 @@ class Questionnaire extends React.Component{
             let nextURL = (match.params.page == options.length - 1) ?  "/results"
                 : `/next/${Number(match.params.page) + 1}/`;
 
-            return <QuestionAboutReact question={match.params.page} optionNumber={match.params.page}
+            return <Question question={match.params.page} optionNumber={match.params.page}
                                        onChange={(i) => this.selectOption(i)} nextURL={nextURL} />
         };
 

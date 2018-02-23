@@ -1,4 +1,9 @@
+@import url(../StaticPages/StaticPages.css);
+@import url(../Question/Question.css);
 body {
-  background-color: black; }
+  background-color: #222; }
+
+a {
+  text-decoration: none; }
 
 /*# sourceMappingURL=Questionnare.css.map */

@@ -11,8 +11,28 @@
 }
 
 .HomePage {
-  @include position(relative,35%,10%);
+  margin-top: 15vh;
+  @include position(relative,_, 18%);
+  .HomePage-logo{
+    @include position(relative,_,27%);
+    width: 120px;
+    height: 120px;
+  }
   .HomePage-title {
-    @include text-props(white,40px,bold,_);
+    @include text-props(white, 48px, bold, _);
+    text-shadow: 2px 2px 3px black;
+  }
+  .HomePage-start {
+    margin-top: 10vh;
+    @include position(relative,_,21%);
+      a {
+        @include text-props(white,32px,bold,15px 65px);
+        border: 1px solid white;
+        text-shadow: 2px 2px 3px black;
+        &:hover{
+            color:black;
+            background-color: red;
+          }
+      }
   }
 }
