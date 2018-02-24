@@ -8,15 +8,30 @@ import HomePage from "../StaticPages/HomePage";
 import ResultPage from "../StaticPages/ResultPage";
 
 const questions = [
-    "firstQuestion ?",
-    "secondQuestion ?",
-    "thirdQuestion ?",
+    "Что такое React JS?",
+    "Что делает setState?",
+    "Что такое элемент?",
+    "В каком случае нужно использовать класс?",
+    "Что такое refs?",
+    "Что такое компонент?",
+    "Зачем нужен артибут key?",
+    "В чем разница между контролируемым и неконтролируемым компонентом?",
+    "В чём польза использования PropTypes ?",
+    "В какой стадии жизненого цикла компонента лучше всего использовать Ajax запросы? ",
+    "Зачем нужен componentWillMount?",
 ];
 
 const options = [
-    [1, ["foo", "bar"]],        // ответ "bar"
-    [0, ["bar", "foo"]],        // ответ "bar"
-    [2, ["foo", "bar", "baz"]], // ответ "baz"
+    [1, ["foo", "bar"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
+    [2, ["foo", "bar", "baz"]],
 ];
 const correctOptions = options.map(R.nth(0), options); //правильные ответы
 
